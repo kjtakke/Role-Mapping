@@ -26,6 +26,10 @@ def arrayFromDelToDF(string, cl, ln, cols):
         
     return pd.DataFrame(lg, columns=cols)
 
-j = "a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b"
+j = "a{%,%}b{%;%}c{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}d{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b{%;%}a{%,%}b"
 js = arrayFromDelToDF(j, "{%,%}", "{%;%}",['Column 1','Column 2'])
-js
+
+
+l = "a{%,%}b{%,%}c{%,%}d{%;%}c{%,%}b{%,%}c{%,%}d"
+ls = arrayFromDelToDF(l, "{%,%}", "{%;%}",['Column 3','Column 4','Column 5','Column 6'])
+df = pd.merge(js, ls, left_on=['Column 1','Column 2'], right_on=['Column 3','Column 4'], how='left')
