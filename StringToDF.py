@@ -33,3 +33,5 @@ js = arrayFromDelToDF(j, "{%,%}", "{%;%}",['Column 1','Column 2'])
 l = "a{%,%}b{%,%}c{%,%}d{%;%}c{%,%}b{%,%}c{%,%}d"
 ls = arrayFromDelToDF(l, "{%,%}", "{%;%}",['Column 3','Column 4','Column 5','Column 6'])
 df = pd.merge(js, ls, left_on=['Column 1','Column 2'], right_on=['Column 3','Column 4'], how='left')
+df = df.drop(['Column 3','Column 4'], 1)
+df.head()
