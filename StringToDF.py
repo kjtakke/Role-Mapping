@@ -42,29 +42,20 @@ df = df.drop(['Column 3','Column 4'], 1)
 df.head()
 
 #All Files in a Directory
-def allFilesInDir(dir):
+def allFilesInDir(dir, ext):
     import os
     dirsText = []
     for root, dirs, files in os.walk(dir):
         for file in files:
-            if file.endswith(".txt"):
+            if file.endswith(ext):
                 st = os.path.join(root, file)
                 try:
                     fileObject = open(st, "r")
                     data = fileObject.read()
-                    #Do somthing with your data here
-                    
-                    
-                    ################################
-                    #print(data)
-                    dirsText.append(data[0:10])
-                    
+                    dirsText.append(data)
                 except:
                     pass
-    print(len(dirsText))
     return dirsText
 
-dt = allFilesInDir("E:\\Users\\Desktop")
-print(dt)
-                    
-                    
+dt = allFilesInDir("E:\\Users\\Desktop", ".txt")
+print(dt)         
