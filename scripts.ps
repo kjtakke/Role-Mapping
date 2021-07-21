@@ -20,7 +20,7 @@ For ($i=1;$i-le $Ary1.count-2; $i++){
 $str += $Ary1[$i] + "\n"
 }
 
-
+$csv_content = $some_string | ConvertFrom-Csv -Delim ';'
 
 
 $Inner = @{'Corps' = " "; Position = " "; Role = " "}
