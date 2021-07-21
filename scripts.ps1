@@ -526,22 +526,6 @@ $JoinParams = @{
 $FinalTable =  Join-Object @JoinParams
 
 
+$roles | Export-Csv -Path ".\Roles.csv"  -NoTypeInformation
 
-
-
-
-
-$csv_content = $some_string | ConvertFrom-Csv -Delim ';'
-
-
-Get-Process | Export-Csv -Path .\Processes.csv
-
-
-
-
-$P | Get-Member
-
-
-
-
-
+$roles  | Get-Member
