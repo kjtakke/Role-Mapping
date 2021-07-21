@@ -12,6 +12,7 @@ $Positions = Import-Csv -Path .\Positions.csv
 $content = [IO.File]::ReadAllText("H:My Documents\erp\PTE-CPL-SCM-RAAOC.erp")
 $content =  $content -replace "%}", ""
 $content =  $content -replace "{%", ""
+$content =  $content -replace ",", ";"
 $Ary1 = $content.Split("\")
 
 $str = ""
