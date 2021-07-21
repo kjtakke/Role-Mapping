@@ -530,6 +530,7 @@ $roles | Export-Csv -Path ".\Roles.csv"  -NoTypeInformation
 
 $roles  | Get-Member
 
+$Server = Read-Host -Prompt 'Input your server  name'
 $FileStr = ""
 Get-ChildItem "E:\Users\Desktop" -Filter *.xlsx | 
 Foreach-Object {
