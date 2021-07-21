@@ -529,3 +529,10 @@ $FinalTable =  Join-Object @JoinParams
 $roles | Export-Csv -Path ".\Roles.csv"  -NoTypeInformation
 
 $roles  | Get-Member
+
+$FileStr = ""
+Get-ChildItem "E:\Users\Desktop" -Filter *.xlsx | 
+Foreach-Object {
+    $content = Get-Content $_.FullName
+    $FileStr += $_.FullName + ";"
+}
