@@ -518,17 +518,14 @@ $TblJn=Join-Object -Left $Positions -Right $roles -LeftProperties Corps -RightPr
 $JoinParams = @{
     Left = $Positions
     Right = $roles
-    LeftJoinProperty = 'Corps'
-    RightJoinProperty = 'Corps'
+    LeftJoinProperty = 'Corps', 'Posn Title', 'Rank'
+    RightJoinProperty = 'Corps', 'Job', 'Rank'
     Type = 'AllInLeft'
     Prefix = 'InRight_'
 }
 Join-Object @JoinParams
 
-
 $csv_content = $some_string | ConvertFrom-Csv -Delim ';'
-
-
 
 
 Get-Process | Export-Csv -Path .\Processes.csv
