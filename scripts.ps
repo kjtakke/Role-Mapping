@@ -5,7 +5,19 @@ $CharArray =$InputString.Split("-")
 $Ary1.count
 $content -replace "%}", ""
 
-$content = [IO.File]::ReadAllText("E:\Users\Desktop\issue.txt")
+$content = [IO.File]::ReadAllText("H:My Documents\erp\PTE-CPL-SCM-RAAOC.erp")
 $content =  $content -replace "%}", ""
 $content =  $content -replace "{%", ""
 $Ary1 = $content.Split("\")
+
+
+$Inner = @{'Corps' = " "; Position = " "; Role = " "}
+$Outer = @{}
+For ($i=1;$i-le $Ary3.count-2; $i++){
+  $Ary2 = $Ary1[$i].Split(",")
+  $Inner = @{'Corps' = " "; Position = " "; Role = " "}
+  $Inner. Corps = $Ary2[0]
+  $Inner. Position = $Ary2[1]
+  $Inner. Role = $Ary2[2]
+  $Outer.Add($i, $Inner)
+}
