@@ -21,7 +21,25 @@ $str += $Ary1[$i] + "`n"
 }
 $roles = $str | ConvertFrom-Csv -Delim ';'
 
+
+$TblJn=Join-Object -Left $Positions -Right $roles -LeftProperties Corps -RightProperties Corps
+
+
+$JoinParams = @{
+    Left = $Positions
+    Right = $roles
+    LeftJoinProperty = 'Corps'
+    RightJoinProperty = 'Corps'
+    Type = 'AllInLeft'
+    Prefix = 'InRight_'
+}
+Join-Object @JoinParams
+
+
 $csv_content = $some_string | ConvertFrom-Csv -Delim ';'
+
+
+
 
 
 $Outer | Format-Table
