@@ -6,13 +6,20 @@ $Ary1.count
 $content -replace "%}", ""
 
 
-cd "H:My Documents\erp"
+cd "H:\My Documents\erp"
 $Positions = Import-Csv -Path .\Positions.csv
 
 $content = [IO.File]::ReadAllText("H:My Documents\erp\PTE-CPL-SCM-RAAOC.erp")
 $content =  $content -replace "%}", ""
 $content =  $content -replace "{%", ""
 $Ary1 = $content.Split("\")
+
+$str = ""
+For ($i=1;$i-le $Ary1.count-2; $i++){
+$str += $Ary1[$i] + "\n"
+}
+
+
 
 
 $Inner = @{'Corps' = " "; Position = " "; Role = " "}
@@ -27,8 +34,19 @@ For ($i=1;$i-le $Ary3.count-2; $i++){
 }
 
 
+$Inner = @{'Corps' = " "; Position = " "; Role = " "}
+$Outer = @{}
+For ($i=1;$i-le 5; $i++){
+  $Ary2 = $Ary1[$i].Split(",")
+  $Inner = @{'Corps' = " "; Position = " "; Role = " "}
+  $Inner. Corps = $Ary2[0]
+  $Inner. Position = $Ary2[1]
+  $Inner. Role = $Ary2[2]
+  $Outer.Add($i, $Inner)
+  Write-Output $Outer[$i]
+}
 
-
+$Outer | Format-Table
 
 Get-Process | Export-Csv -Path .\Processes.csv
 
