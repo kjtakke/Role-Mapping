@@ -44,6 +44,29 @@ $csv_content = $some_string | ConvertFrom-Csv -Delim ';'
 
 $Outer | Format-Table
 
+
+$csv1 = Import-Csv ".\test.csv"
+$csv2 = Import-csv ".\test2.csv"
+
+$params = @{
+    Left = $csv1
+    Right = $csv2
+    Where = { $args[0].Day -eq $args[1].Day -and $args[0].Sender -eq $args[1].Sender }
+    LeftProperties = "Sender","Day","Timestamp"
+    RightProperties = "Sender","Day"
+    Type = 'AllInBoth'
+}
+
+$Join = Join-Object @params |
+ForEach-Object {
+    $fail = 'N'
+    if ($null -ne $_.Timestamp) { $fail = 'Y' }
+
+    Add-Member -InputObject $_ -MemberType NoteProperty -Name Fail -Value $fail -PassThru
+}
+
+$Join | Export-Csv .\output.csv -NoTypeInformation
+
 Get-Process | Export-Csv -Path .\Processes.csv
 
 $P | Get-Member
