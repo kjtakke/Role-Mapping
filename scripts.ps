@@ -12,40 +12,17 @@ $Positions = Import-Csv -Path .\Positions.csv
 $content = [IO.File]::ReadAllText("H:My Documents\erp\PTE-CPL-SCM-RAAOC.erp")
 $content =  $content -replace "%}", ""
 $content =  $content -replace "{%", ""
-$content =  $content -replace ",", ";"
+$content =  $content -replace ",", " ; "
 $Ary1 = $content.Split("\")
 
-$str = ""
+$str = "Corps; Rank; Job; Role; Ratio" + "`n"
 For ($i=1;$i-le $Ary1.count-2; $i++){
-$str += $Ary1[$i] + "\n"
+$str += $Ary1[$i] + "`n"
 }
+$roles = $str | ConvertFrom-Csv -Delim ';'
 
 $csv_content = $some_string | ConvertFrom-Csv -Delim ';'
 
-
-$Inner = @{'Corps' = " "; Position = " "; Role = " "}
-$Outer = @{}
-For ($i=1;$i-le $Ary3.count-2; $i++){
-  $Ary2 = $Ary1[$i].Split(",")
-  $Inner = @{'Corps' = " "; Position = " "; Role = " "}
-  $Inner. Corps = $Ary2[0]
-  $Inner. Position = $Ary2[1]
-  $Inner. Role = $Ary2[2]
-  $Outer.Add($i, $Inner)
-}
-
-
-$Inner = @{'Corps' = " "; Position = " "; Role = " "}
-$Outer = @{}
-For ($i=1;$i-le 5; $i++){
-  $Ary2 = $Ary1[$i].Split(",")
-  $Inner = @{'Corps' = " "; Position = " "; Role = " "}
-  $Inner. Corps = $Ary2[0]
-  $Inner. Position = $Ary2[1]
-  $Inner. Role = $Ary2[2]
-  $Outer.Add($i, $Inner)
-  Write-Output $Outer[$i]
-}
 
 $Outer | Format-Table
 
