@@ -5,6 +5,10 @@ $CharArray =$InputString.Split("-")
 $Ary1.count
 $content -replace "%}", ""
 
+
+cd "H:My Documents\erp"
+$Positions = Import-Csv -Path .\Positions.csv
+
 $content = [IO.File]::ReadAllText("H:My Documents\erp\PTE-CPL-SCM-RAAOC.erp")
 $content =  $content -replace "%}", ""
 $content =  $content -replace "{%", ""
@@ -21,3 +25,11 @@ For ($i=1;$i-le $Ary3.count-2; $i++){
   $Inner. Role = $Ary2[2]
   $Outer.Add($i, $Inner)
 }
+
+
+
+
+
+Get-Process | Export-Csv -Path .\Processes.csv
+
+$P | Get-Member
