@@ -530,10 +530,32 @@ $roles | Export-Csv -Path ".\Roles.csv"  -NoTypeInformation
 
 $roles  | Get-Member
 
-$Server = Read-Host -Prompt 'Input your server  name'
+
+$FilePath = Read-Host -Prompt 'File Path:'
+cd $FilePath
 $FileStr = ""
-Get-ChildItem "E:\Users\Desktop" -Filter *.xlsx | 
+Get-ChildItem $FilePath -Filter *.erp | 
 Foreach-Object {
     $content = Get-Content $_.FullName
     $FileStr += $_.FullName + ";"
 }
+$FileStrs = $FileStr.Split(";")
+$FileStrs
+
+$str = "Corps; Rank; Job; Role; Ratio" + "`n"
+For ($k=0;$k-le $FileStrs.count; $k++){
+    $content = [IO.File]::ReadAllText($FileStrs[$k])
+    $content =  $content -replace "%}", ""
+    $content =  $content -replace "{%", ""
+    $content =  $content -replace ",", " ; "
+    $Ary1 = $content.Split("\")
+
+    
+    For ($i=1;$i-le $Ary1.count-2; $i++){
+    $str += $Ary1[$i] + "`n"
+    }
+}
+
+$roles = $str | ConvertFrom-Csv -Delim ';'
+$roles | Export-Csv -Path ".\Roles.csv"  -NoTypeInformation
+# H:\My Documents\erp
