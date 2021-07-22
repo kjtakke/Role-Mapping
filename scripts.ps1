@@ -559,3 +559,7 @@ For ($k=0;$k-le $FileStrs.count; $k++){
 $roles = $str | ConvertFrom-Csv -Delim ';'
 $roles | Export-Csv -Path ".\Roles.csv"  -NoTypeInformation
 # H:\My Documents\erp
+
+
+
+Invoke-Item "H:\My Documents\SAP Analysis.xlsx"
